@@ -30,6 +30,7 @@
     "@types/react-dom": "^18.2.21",
     "alpinejs": "^3.13.7",
     "astro": "^4.4.15",
+    "astro-seo": "^0.8.3",
     "htmx.org": "^1.9.10",
     "pocketbase": "^0.21.1",
     "react": "^18.2.0",
