@@ -21,17 +21,49 @@ const description =
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        class="solid-line"
         d="M18 119.305C158.8 265.669 353.36 195.055 494.16 32"
         stroke="currentColor"
         stroke-width="36"
         stroke-linecap="round"></path>
       <path
+        class="dotted-line"
         d="M19 120.5C159.8 -25.864 353.36 35.9452 494.16 199"
         stroke="currentColor"
         stroke-opacity="0.5"
         stroke-width="36"
         stroke-linecap="round"
         stroke-dasharray="1 56.28"></path>
+
+      <style>
+        :root {
+          --animation-duration: 750ms;
+          --second-line-delay: 300ms;
+          --animation-transition: cubic-bezier(0.5, 0.07, 0.31, 1);
+        }
+
+        .solid-line {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: line-animation var(--animation-duration)
+            var(--animation-transition) forwards;
+        }
+
+        .dotted-line {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation-direction: reverse;
+          animation: line-animation var(--animation-duration)
+            var(--animation-transition) forwards;
+          animation-delay: var(--second-line-delay);
+        }
+
+        @keyframes line-animation {
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+      </style>
     </svg>
 
     <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
