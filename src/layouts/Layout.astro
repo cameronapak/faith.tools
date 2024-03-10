@@ -4,9 +4,10 @@ import "../global.css";
 interface Props {
   title: string;
   description?: string;
+  bodyClasses?: string;
 }
 
-const { title, description = '' } = Astro.props;
+const { title, description = '', bodyClasses } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +22,7 @@ const { title, description = '' } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="prose !max-w-[100vw] w-full">
+  <body class={`prose min-h-[100svh] !max-w-[100vw] w-full ${bodyClasses}`}>
     <slot />
   </body>
 </html>
