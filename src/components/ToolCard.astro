@@ -1,6 +1,4 @@
 ---
-import Image from "astro/components/Image.astro";
-
 interface Props {
   name: string;
   shortDescription: string;
@@ -20,7 +18,7 @@ const { name, shortDescription, iconUrl, id, submittedBy, website } = Astro.prop
     href={website}
   >
     <div class="flex gap-3 items-center">
-      <Image
+      <img
         class="rounded-xl m-0 bg-white h-12 w-12 object-cover shadow"
         src={iconUrl}
         alt={name}
