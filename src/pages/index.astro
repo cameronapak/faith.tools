@@ -1,6 +1,8 @@
 ---
 import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
+import Logo from "../components/Logo.astro";
+
 const title = "faith.tools - coming soon";
 const description =
   "Equipping believers with technology to help them live their God-given calling every single day, together";
@@ -13,64 +15,12 @@ const description =
 >
   <main
     id="main"
-    class="container p-6 flex flex-col justify-start gap-4 items-center"
+    class="container py-12 p-6 flex flex-col justify-start gap-4 items-center"
   >
-    <svg
-      width={128}
-      viewBox="0 0 512 231"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        class="solid-line"
-        d="M18 119.305C158.8 265.669 353.36 195.055 494.16 32"
-        stroke="currentColor"
-        stroke-width="36"
-        stroke-linecap="round"></path>
-      <path
-        class="dotted-line"
-        d="M19 120.5C159.8 -25.864 353.36 35.9452 494.16 199"
-        stroke="currentColor"
-        stroke-opacity="0.5"
-        stroke-width="36"
-        stroke-linecap="round"
-        stroke-dasharray="1 56.28"></path>
-
-      <style>
-        :root {
-          --animation-duration: 750ms;
-          --second-line-delay: 300ms;
-          --animation-transition: cubic-bezier(0.5, 0.07, 0.31, 1);
-        }
-
-        .solid-line {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: line-animation var(--animation-duration)
-            var(--animation-transition) forwards;
-        }
-
-        .dotted-line {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation-direction: reverse;
-          animation: line-animation var(--animation-duration)
-            var(--animation-transition) forwards;
-          animation-delay: var(--second-line-delay);
-        }
-
-        @keyframes line-animation {
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-      </style>
-    </svg>
+    <Logo size={128} includeText={false} />
 
     <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
-      faith.tools <div class="badge bg-blue-100 py-1 h-fit px-3 text-blue-800">
-        beta
-      </div>
+      faith.tools
     </h1>
     <p class="balanced m-0 max-w-[65ch] text-center text-slate-800">
       The best digital services and apps for Christians and the faces of the
@@ -79,24 +29,44 @@ const description =
 
     <section class="flex flex-col items-center gap-4 mt-4">
       <div class="flex justify-center gap-3">
-        <a href="/add/tool" target="_blank" class="btn btn-neutral"
+        <a href="/add/tool" target="_blank" class="btn btn-neutral text-white"
           >Submit a Tool</a
         >
         <a href="/add/creator" target="_blank" class="btn">Submit a Creator</a>
       </div>
       <p class="balanced text-slate-500 m-0 max-w-[65ch] text-sm text-center">
-        Do you make a digital product or service that could help build the
+        Do you make a digital product or service that contributes towards the
         Kingdom of God?
       </p>
     </section>
   </main>
 
   <section class="container mx-auto p-6 grid grid-cols-3 gap-4">
-    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
-    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
-    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
-    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
-    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+    <ToolCard
+      name="YouVersion Bible App"
+      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
+      iconUrl="https://via.placeholder.com/64"
+    />
+    <ToolCard
+      name="YouVersion Bible App"
+      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
+      iconUrl="https://via.placeholder.com/64"
+    />
+    <ToolCard
+      name="YouVersion Bible App"
+      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
+      iconUrl="https://via.placeholder.com/64"
+    />
+    <ToolCard
+      name="YouVersion Bible App"
+      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
+      iconUrl="https://via.placeholder.com/64"
+    />
+    <ToolCard
+      name="YouVersion Bible App"
+      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
+      iconUrl="https://via.placeholder.com/64"
+    />
   </section>
 
   <footer class="container mx-auto p-6">

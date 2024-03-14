@@ -1,7 +1,16 @@
+---
+interface Props {
+  includeText?: boolean;
+  size?: number;
+}
+
+const { includeText = true, size = 48 } = Astro.props;
+---
+
 <a href="/" class="transition-transform duration-150 active:scale-95">
   <div class="flex items-center gap-3">
     <svg
-      width={48}
+      width={size}
       viewBox="0 0 512 231"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +61,13 @@
       </style>
     </svg>
 
-    <p class="flex items-baseline gap-1 text-2xl font-bold max-sm:flex-col">
-      faith.tools <span class="text-sm text-slate-500 font-normal">(beta)</span>
-    </p>
+    {
+      includeText ? (
+        <p class="flex items-baseline gap-1 text-2xl font-bold max-sm:flex-col">
+          faith.tools{" "}
+          <span class="text-sm text-slate-500 font-normal">(beta)</span>
+        </p>
+      ) : null
+    }
   </div>
 </a>
