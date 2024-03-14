@@ -9,6 +9,9 @@ const tools = await getListOfTools();
 const title = "faith.tools - coming soon";
 const description =
   "Equipping believers with technology to help them live their God-given calling every single day, together";
+
+// Set the headers to cache the page for an entire day.
+Astro.response.headers.set('Cache-Control', 'public, max-age=86400');
 ---
 
 <Layout
