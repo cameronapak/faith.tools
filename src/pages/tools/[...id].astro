@@ -9,7 +9,7 @@ interface Props {
   iconUrl: string;
 }
 
-const { id } = Astro.params;
+const id = Astro.params.id;
 const { name, description, url, iconUrl }  = Astro.props;
 
 const headTitle = '';
