@@ -2,6 +2,9 @@
 import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
+import { getListOfTools } from "../api/baserow";
+
+const tools = await getListOfTools();
 
 const title = "faith.tools - coming soon";
 const description =
@@ -11,7 +14,7 @@ const description =
 <Layout
   title={title}
   description={description}
-  bodyClasses="grid grid-rows-[1fr_auto] gap-4 bg-white"
+  bodyClasses="grid grid-rows-[1fr_auto] gap-4 bg-slate-100"
 >
   <main
     id="main"
@@ -23,54 +26,79 @@ const description =
       faith.tools
     </h1>
     <p class="balanced m-0 max-w-[65ch] text-center text-slate-800">
-      The best digital services and apps for Christians and the faces of the
-      faithful people behind them.
+      The best digital services and apps for Christians and the faithful people
+      who create them.
     </p>
 
     <section class="flex flex-col items-center gap-4 mt-4">
       <div class="flex justify-center gap-3">
-        <a href="/add/tool" target="_blank" class="btn btn-neutral text-white"
-          >Submit a Tool</a
+        <a
+          href="/add/tool"
+          target="_blank"
+          class="btn btn-neutral text-white btn-sm">Recommend a Tool</a
         >
-        <a href="/add/creator" target="_blank" class="btn bg-slate-100 hover:bg-slate-200 border-none">Submit a Creator</a>
+        <a
+          href="/add/creator"
+          target="_blank"
+          class="btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+          >Recommend a Creator</a
+        >
       </div>
-      <p class="balanced text-slate-500 m-0 max-w-[65ch] text-sm text-center">
-        Do you make a digital product or service that contributes towards the
-        Kingdom of God?
-      </p>
+    </section>
+
+    <section
+      class="container mx-auto p-6 max-sm:grid-cols-1 grid grid-cols-3 gap-4 mt-6"
+    >
+      {
+        tools.results.map((tool) => (
+          <ToolCard
+            name={tool["Name"]}
+            shortDescription={tool["Short Description"]}
+            iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
+            id={tool.id}
+            submittedBy={tool["Submitter Name"]}
+            website={tool["Website"]}
+          />
+        ))
+      }
+      <a href="/add/tool" target="_blank">
+        <section
+          class="flex h-full flex-col items-start gap-3 justify-start border bg-slate-100 border-slate-300 border-dashed p-4 rounded-xl hover:brightness-95 transition-all duration-150"
+        >
+          <div class="flex gap-3 items-center">
+            <div
+              class="flex items-center justify-center rounded-xl m-0 border border-slate-300 border-dashed h-12 w-12"
+            >
+              <svg
+                class="text-slate-600"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 448 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-base line-clamp-2 leading-tight font-semibold balanced"
+            >
+              Your Tool
+            </h3>
+          </div>
+          <p class="m-0 line-clamp-3 text-xs text-slate-500">
+            Submit your tool or a tool you recommend to this collection. New
+            tools added daily.
+          </p>
+        </section>
+      </a>
     </section>
   </main>
 
-  <section class="container mx-auto p-6 grid grid-cols-3 gap-4">
-    <ToolCard
-      name="YouVersion Bible App"
-      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
-      iconUrl="https://via.placeholder.com/64"
-    />
-    <ToolCard
-      name="YouVersion Bible App"
-      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
-      iconUrl="https://via.placeholder.com/64"
-    />
-    <ToolCard
-      name="YouVersion Bible App"
-      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
-      iconUrl="https://via.placeholder.com/64"
-    />
-    <ToolCard
-      name="YouVersion Bible App"
-      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
-      iconUrl="https://via.placeholder.com/64"
-    />
-    <ToolCard
-      name="YouVersion Bible App"
-      shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet."
-      iconUrl="https://via.placeholder.com/64"
-    />
-  </section>
-
-  <footer class="container mx-auto p-6">
-    <p class="text-center m-0 text-sm text-slate-500">
+  <footer class="container mx-auto p-6 w-full">
+    <p class="text-center text-sm text-slate-500">
       Created by <a
         class="inherit"
         href="https://cameronpak.com"

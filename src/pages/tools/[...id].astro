@@ -1,6 +1,6 @@
 ---
-import Logo from "../../components/Logo.astro";
-import Layout from "../../layouts/Layout.astro";
+import Logo from '../../components/Logo.astro';
+import Layout from '../../layouts/Layout.astro';
 
 interface Props {
   name: string;
@@ -10,10 +10,13 @@ interface Props {
 }
 
 const { id } = Astro.params;
-const { name, description, url, iconUrl } = Astro.props;
+const { name, description, url, iconUrl }  = Astro.props;
 
-const headTitle = "";
-const headDescription = "";
+const headTitle = '';
+const headDescription = '';
+
+// TODO
+return Astro.redirect('/');
 ---
 
 <Layout title={headTitle} description={headDescription}>

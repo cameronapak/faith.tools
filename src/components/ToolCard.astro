@@ -5,25 +5,35 @@ interface Props {
   name: string;
   shortDescription: string;
   iconUrl: string;
+  id: string | number;
+  submittedBy: string;
+  website: string;
 }
 
-const { name, shortDescription, iconUrl } = Astro.props;
-
-const href = `/tools/1`;
+const { name, shortDescription, iconUrl, id, submittedBy, website } = Astro.props;
 ---
 
 <section>
-  <a class="flex flex-col items-center gap-3 justify-center bg-slate-100 p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none" href={href}>
+  <a
+    class="flex h-full flex-col items-start gap-3 justify-start bg-white p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none"
+    target="_blank"
+    href={website}
+  >
     <div class="flex gap-3 items-center">
       <Image
-        class="rounded-lg m-0 bg-slate-200"
+        class="rounded-xl m-0 bg-white h-12 w-12 object-cover shadow"
         src={iconUrl}
         alt={name}
         width={48}
         height={48}
       />
-      <h3 class="text-sm line-clamp-2 leading-tight font-semibold balanced">{name}</h3>
+      <h3 class="text-base line-clamp-2 leading-tight font-semibold balanced">
+        {name}
+      </h3>
     </div>
     <p class="m-0 line-clamp-2 text-xs text-slate-500">{shortDescription}</p>
+    <p class="m-0 text-[0.6rem] text-slate-500 line-clamp-2">
+      Submitted by {submittedBy}
+    </p>
   </a>
 </section>

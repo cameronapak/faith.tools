@@ -24,6 +24,8 @@ interface ImportMetaEnv {
   readonly SENTRY_AUTH_TOKEN: string;
   /** https://docs.sentry.io/platforms/javascript/guides/astro/#configure */
   readonly SENTRY_PROJECT: string;
+  /** API Key for Baserow.io */
+  readonly BASEROW_API_KEY: string;
 }
 
 interface ImportMeta {
