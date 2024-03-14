@@ -5,10 +5,9 @@ interface Props {
   name: string;
   shortDescription: string;
   iconUrl: string;
-  url: string;
 }
 
-const { name, shortDescription, iconUrl, url } = Astro.props;
+const { name, shortDescription, iconUrl } = Astro.props;
 ---
 
 <section class="flex flex-col items-center gap-3 justify-center bg-slate-100 p-4 rounded-xl hover:shadow-md transition-all duration-150">
