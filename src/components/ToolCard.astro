@@ -8,12 +8,22 @@ interface Props {
 }
 
 const { name, shortDescription, iconUrl } = Astro.props;
+
+const href = `/tools/1`;
 ---
 
-<section class="flex flex-col items-center gap-3 justify-center bg-slate-100 p-4 rounded-xl hover:shadow-md transition-all duration-150">
-  <div class="flex gap-3 items-center">
-    <Image class="rounded-lg m-0 bg-slate-200" src={iconUrl} alt={name} width={48} height={48} />
-    <h3 class="text-sm line-clamp-2 leading-tight">{name}</h3>
-  </div>
-  <p class="m-0 line-clamp-2 text-xs text-slate-500">{shortDescription}</p>
+<section>
+  <a class="flex flex-col items-center gap-3 justify-center bg-slate-100 p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none" href={href}>
+    <div class="flex gap-3 items-center">
+      <Image
+        class="rounded-lg m-0 bg-slate-200"
+        src={iconUrl}
+        alt={name}
+        width={48}
+        height={48}
+      />
+      <h3 class="text-sm line-clamp-2 leading-tight font-semibold balanced">{name}</h3>
+    </div>
+    <p class="m-0 line-clamp-2 text-xs text-slate-500">{shortDescription}</p>
+  </a>
 </section>

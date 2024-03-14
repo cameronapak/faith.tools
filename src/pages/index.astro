@@ -1,4 +1,5 @@
 ---
+import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
 const title = "faith.tools - coming soon";
 const description =
@@ -8,11 +9,11 @@ const description =
 <Layout
   title={title}
   description={description}
-  bodyClasses="grid grid-rows-[1fr_auto] gap-4"
+  bodyClasses="grid grid-rows-[1fr_auto] gap-4 bg-white"
 >
   <main
     id="main"
-    class="container p-6 flex flex-col justify-center gap-4 items-center"
+    class="container p-6 flex flex-col justify-start gap-4 items-center"
   >
     <svg
       width={128}
@@ -68,25 +69,35 @@ const description =
 
     <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
       faith.tools <div class="badge bg-blue-100 py-1 h-fit px-3 text-blue-800">
-        coming soon
+        beta
       </div>
     </h1>
     <p class="balanced m-0 max-w-[65ch] text-center text-slate-800">
-      We're building a collection of the best digital services and apps for
-      Christians, as well as the faces and stories of the
-      faithful people behind those tools.
+      The best digital services and apps for Christians and the faces of the
+      faithful people behind them.
     </p>
 
     <section class="flex flex-col items-center gap-4 mt-4">
       <div class="flex justify-center gap-3">
         <a href="/add/tool" target="_blank" class="btn btn-neutral"
-        >Submit a Tool</a
+          >Submit a Tool</a
         >
         <a href="/add/creator" target="_blank" class="btn">Submit a Creator</a>
       </div>
-      <p class="balanced text-slate-500 m-0 max-w-[65ch] text-sm text-center">Do you make a digital product or service that could help build the Kingdom of God?</p>
+      <p class="balanced text-slate-500 m-0 max-w-[65ch] text-sm text-center">
+        Do you make a digital product or service that could help build the
+        Kingdom of God?
+      </p>
     </section>
   </main>
+
+  <section class="container mx-auto p-6 grid grid-cols-3 gap-4">
+    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+    <ToolCard name="YouVersion Bible App" shortDescription="Read God's Word with Bible App Take God’s Word with you wherever you go by downloading the free Bible App. Listen to audio Bibles, create Prayers, study with Friends, and much more—all for free. Choose from more than 2,400 Bible versions in over 1,600 languages on your computer, phone, or tablet." iconUrl="https://via.placeholder.com/64" />
+  </section>
 
   <footer class="container mx-auto p-6">
     <p class="text-center m-0 text-sm text-slate-500">

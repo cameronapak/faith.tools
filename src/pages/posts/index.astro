@@ -6,7 +6,7 @@ const pageTitle = "My Blog";
 const allPosts = await getCollection("posts");
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} bodyClasses="prose">
   <main class="container p-6">
     <div class="text-sm breadcrumbs">
       <ul class="!p-0 !m-0">

@@ -44,7 +44,7 @@ const { title, description = "", bodyClasses } = Astro.props;
     />
   </head>
 
-  <body class={`prose min-h-[100svh] !max-w-[100vw] w-full ${bodyClasses}`}>
+  <body class={`min-h-[100svh] !max-w-[100vw] w-full ${bodyClasses}`}>
     <slot />
   </body><script>
     import * as htmx from "htmx.org";
