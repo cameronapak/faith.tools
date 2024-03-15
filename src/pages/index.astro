@@ -7,14 +7,14 @@ import { getListOfTools } from "../api/baserow";
 
 const tools = await getListOfTools();
 
-const title = "faith.tools - The best digital services and apps for Christians"
+const title = "faith.tools - The best digital services and apps for Christians";
 const description =
   "A curated list of the best digital services and apps for Christians and the faithful people who create them.";
 
 const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
-  
+
 // Cache for 1 hour.
-Astro.response.headers.set('Cache-Control', 'public, max-age=3600');
+Astro.response.headers.set("Cache-Control", "public, max-age=3600");
 ---
 
 <Layout
@@ -36,7 +36,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=3600');
       who create them.
     </p>
 
-    <section class="flex flex-col items-center gap-4 mt-4">
+    <section class="flex flex-col items-center gap-8 mt-4">
       <div class="flex justify-center gap-3">
         <a
           href="/add/tool"
@@ -50,6 +50,11 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=3600');
           >Recommend a Creator</a
         >
       </div>
+      <input
+        type="text"
+        placeholder="Search a tool..."
+        class="bg-inherit input input-bordered input-md w-full"
+      />
     </section>
 
     <section
