@@ -1,0 +1,24 @@
+---
+import ToolCard from "../../../components/ToolCard.astro";
+import AddAToolCard from "../../../components/AddAToolCard.astro";
+import { getListOfTools } from "../../../api/baserow";
+
+const search = Astro.url.searchParams.get("search") || "";
+const tools = await getListOfTools(search);
+const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
+
+
+export const partial = true;
+---
+
+{
+  randomizeTools.map((tool) => (
+    <ToolCard
+      name={tool["Name"]}
+      shortDescription={tool["Short Description"]}
+      iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
+      website={tool["Website"]}
+    />
+  ))
+}
+<AddAToolCard />

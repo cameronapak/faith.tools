@@ -30,7 +30,7 @@ interface ToolsResponse {
   'results': Tool[];
 }
 
-export async function getListOfTools() {
+export async function getListOfTools(query: string = '') {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/266544/');
   const searchParams = new URLSearchParams({
     user_field_names: 'true',
@@ -41,7 +41,8 @@ export async function getListOfTools() {
       ],
       "groups": [],
     }),
-    "include": 'Name,Description,Approved,Image,Short Description,Submitter Name,Website'
+    "include": 'Name,Description,Approved,Image,Short Description,Submitter Name,Website',
+    search: query,
   })
 
   const response = await fetch(baseUrl.toString() + '?' + searchParams, {
