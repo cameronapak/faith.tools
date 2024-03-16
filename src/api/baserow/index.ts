@@ -19,7 +19,10 @@ type Tool = {
     'uploaded_at': string;
   }[];
   'Short Description': string;
-  'Submitter Name': string;
+  Tags: {
+    'id': number;
+    'value': string;
+  }[];
   'Website': string;
 }
 
@@ -41,7 +44,7 @@ export async function getListOfTools(query: string = '') {
       ],
       "groups": [],
     }),
-    "include": 'Name,Description,Approved,Image,Short Description,Submitter Name,Website',
+    "include": 'Name,Description,Approved,Image,Short Description,Website,Tags',
     search: query,
   })
 
@@ -56,4 +59,25 @@ export async function getListOfTools(query: string = '') {
   const data: ToolsResponse = await response.json();
 
   return data;
+}
+
+export async function getListFields() {
+  const response = await fetch('https://api.baserow.io/api/database/fields/table/266544/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "Token " + import.meta.env.BASEROW_API_KEY,
+    },
+  })
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getListOfTags() {
+  const listFieldsResponse = await getListFields();
+  const tags = listFieldsResponse.filter((field: any) => field.name === 'Tags');
+  const tagOptions: { id: number, value: string }[] = tags?.[0]?.select_options;
+  return tagOptions.sort((a, b) => a.value.localeCompare(b.value));
 }

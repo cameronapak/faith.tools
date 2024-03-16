@@ -3,9 +3,10 @@ import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
 import AddAToolCard from "../components/AddAToolCard.astro";
-import { getListOfTools } from "../api/baserow";
+import { getListOfTools, getListOfTags } from "../api/baserow";
 
 const tools = await getListOfTools();
+const tags = await getListOfTags();
 
 const title = "faith.tools - The best digital services and apps for Christians";
 const description =
@@ -72,8 +73,14 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
         hx-get="/api/htmx-partials/ListOfTools"
         type="text"
         placeholder="Search a tool..."
-        class="bg-inherit input input-bordered input-md w-full"
+        class="bg-inherit input input-bordered input-md w-full max-w-md"
       />
+      {/* Tags */} 
+      <!-- <div class="flex justify-start flex-wrap gap-3">
+        {tags.map((tag) => (
+          <button class="btn btn-xs btn-outline border-slate-300">{tag.value}</button>
+        ))}
+      </div> -->
     </section>
 
     <section
@@ -87,6 +94,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
             shortDescription={tool["Short Description"]}
             iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
             website={tool["Website"]}
+            tags={tool['Tags']}
           />
         ))
       }

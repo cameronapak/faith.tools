@@ -4,9 +4,13 @@ interface Props {
   shortDescription: string;
   iconUrl: string;
   website: string;
+  tags: {
+    value: string;
+    id: string | number;
+  }[];
 }
 
-const { name, shortDescription, iconUrl, website } = Astro.props;
+const { name, shortDescription, iconUrl, website, tags } = Astro.props;
 ---
 
 <section>
@@ -29,5 +33,14 @@ const { name, shortDescription, iconUrl, website } = Astro.props;
       </h3>
     </div>
     <p class="m-0 line-clamp-2 text-xs text-slate-500">{shortDescription}</p>
+    <div class="flex flex-wrap gap-2">
+      {
+        tags?.map((tag) => (
+          <span class="badge badge-outline h-6 badge-sm border-slate-200 text-slate-600">
+            {tag.value}
+          </span>
+        ))
+      }
+    </div>
   </a>
 </section>

@@ -7,7 +7,6 @@ const search = Astro.url.searchParams.get("search") || "";
 const tools = await getListOfTools(search);
 const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
 
-
 export const partial = true;
 ---
 
@@ -18,6 +17,7 @@ export const partial = true;
       shortDescription={tool["Short Description"]}
       iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
       website={tool["Website"]}
+      tags={tool['Tags']}
     />
   ))
 }
