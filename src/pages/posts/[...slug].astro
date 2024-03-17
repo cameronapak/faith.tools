@@ -14,6 +14,9 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 export const prerender = true;
+
+// TODO - add blog later
+return Astro.redirect('/', 301);
 ---
 
 <Layout title={entry.data.title} bodyClasses="prose">

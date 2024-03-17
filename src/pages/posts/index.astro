@@ -4,6 +4,9 @@ import Layout from "../../layouts/Layout.astro";
 
 const pageTitle = "My Blog";
 const allPosts = await getCollection("posts");
+
+// TODO - add blog later
+return Astro.redirect('/', 301);
 ---
 
 <Layout title={pageTitle} bodyClasses="prose">
