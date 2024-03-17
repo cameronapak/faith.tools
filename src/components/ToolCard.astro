@@ -37,7 +37,9 @@ const { name, shortDescription, iconUrl, website, tags } = Astro.props;
     <div class="flex flex-wrap gap-2">
       {
         tags?.map((tag) => (
-          <span class="badge badge-outline h-6 badge-sm border-slate-200 text-slate-600">
+          <span
+            class="badge badge-outline h-6 badge-sm border-slate-200 text-slate-600"
+          >
             {tag.value}
           </span>
         ))
