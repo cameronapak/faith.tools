@@ -23,43 +23,59 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
   description={description}
   bodyClasses="grid grid-rows-[1fr_auto] gap-4 bg-slate-100"
 >
-  <main
-    id="main"
-    class="container py-12 p-6 flex flex-col justify-start gap-4 items-center"
-  >
-    <Logo size={128} includeText={false} />
+  <div class="grid grid-cols-[256px_1fr] max-sm:grid-cols-1">
+    <aside class="max-sm:hidden max-h-screen overflow-y-auto sticky top-0 left-0 bottom-0 overscroll-contain bg-slate-200">
+      <ul class="flex flex-col border-r border-slate-200">
+        <li role="button" class="py-3 ml-6 pr-6 border-b border-slate-300 text-xs m-0">
+          All
+        </li>
+        {
+          tags.map((tag) => (
+            <li role="button" class="py-3 ml-6 pr-6 border-b border-slate-300 text-xs m-0">
+              {tag.value}
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
 
-    <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
-      faith.tools
-    </h1>
+    <main
+      id="main"
+      class="container py-12 p-6 flex flex-col justify-start gap-4 items-center"
+    >
+      <Logo size={128} includeText={false} />
 
-    <div class="flex flex-col gap-2 max-w-[65ch] items-center">
-      <p class="balanced m-0 text-center w-full text-slate-800">
-        The best digital services and apps for Christians and the faithful
-        people who create them.
-      </p>
+      <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
+        faith.tools
+      </h1>
 
-      <p class="balanced m-0 text-xs text-center w-full text-slate-600">
-        New tools are added daily and displayed in random order.
-      </p>
-    </div>
+      <div class="flex flex-col gap-2 max-w-[65ch] items-center">
+        <p class="balanced m-0 text-center w-full text-slate-800">
+          The best digital services and apps for Christians and the faithful
+          people who create them.
+        </p>
 
-    <section class="flex flex-col items-center gap-8 mt-4">
-      <div class="flex justify-center flex-wrap gap-3">
-        <a
-          href="/add/tool"
-          target="_blank"
-          class="max-sm:w-full btn btn-neutral text-white btn-sm"
-          >Recommend a Tool</a
-        >
-        <a
-          href="/add/creator"
-          target="_blank"
-          class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
-          >Recommend a Creator</a
-        >
-        <button
-          x-data={`{
+        <p class="balanced m-0 text-xs text-center w-full text-slate-600">
+          New tools are added daily and displayed in random order.
+        </p>
+      </div>
+
+      <section class="flex flex-col items-center gap-8 mt-4">
+        <div class="flex justify-center flex-wrap gap-3">
+          <a
+            href="/add/tool"
+            target="_blank"
+            class="max-sm:w-full btn btn-neutral text-white btn-sm"
+            >Recommend a Tool</a
+          >
+          <a
+            href="/add/creator"
+            target="_blank"
+            class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+            >Recommend a Creator</a
+          >
+          <button
+            x-data={`{
             openRandomToolInNewTab() {
               const toolsSectionEl = document.getElementById('search-results');
               const allToolEls = Array.from(toolsSectionEl.querySelectorAll('a'));
@@ -67,48 +83,51 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
               window.open(randomToolEl.href, '_blank');
             }
           }`}
-          type="button"
-          x-on:click="openRandomToolInNewTab()"
-          class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
-        >
-          Suprise Me
-        </button>
-      </div>
-      <input
-        name="search"
-        hx-trigger="keyup changed delay:500ms"
-        hx-target="#search-results"
-        hx-get="/api/htmx-partials/ListOfTools"
-        type="text"
-        placeholder="Search a tool..."
-        class="bg-inherit input input-bordered input-md w-full max-w-md"
-      />
-      {/* Tags */}
-      <!-- <div class="flex justify-start flex-wrap gap-3">
+            type="button"
+            x-on:click="openRandomToolInNewTab()"
+            class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+          >
+            Suprise Me
+          </button>
+        </div>
+        <input
+          name="search"
+          hx-trigger="keyup changed delay:500ms"
+          hx-target="#search-results"
+          hx-get="/api/htmx-partials/ListOfTools"
+          type="text"
+          placeholder="Search a tool..."
+          class="bg-inherit input input-bordered input-md w-full max-w-md"
+        />
+        {/* Tags */}
+        <!-- <div class="flex justify-start flex-wrap gap-3">
         {tags.map((tag) => (
           <button class="btn btn-xs btn-outline border-slate-300">{tag.value}</button>
         ))}
       </div> -->
-    </section>
+      </section>
 
-    <section
-      class="container px-0 max-sm:grid-cols-1 grid grid-cols-3 gap-4 mt-6"
-      id="search-results"
-    >
-      {
-        randomizeTools.map((tool) => (
-          <ToolCard
-            name={tool["Name"]}
-            shortDescription={tool["Short Description"]}
-            iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
-            website={tool["Website"]}
-            tags={tool["Tags"]}
-          />
-        ))
-      }
-      <AddAToolCard />
-    </section>
-  </main>
+      <section
+        class="container px-0 max-sm:grid-cols-1 grid grid-cols-3 gap-4 mt-6"
+        id="search-results"
+      >
+        {
+          randomizeTools.map((tool) => (
+            <ToolCard
+              name={tool["Name"]}
+              shortDescription={tool["Short Description"]}
+              iconUrl={
+                tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"
+              }
+              website={tool["Website"]}
+              tags={tool["Tags"]}
+            />
+          ))
+        }
+        <AddAToolCard />
+      </section>
+    </main>
+  </div>
 
   <footer class="container mx-auto p-6 w-full">
     <p class="text-center text-sm text-slate-500">
