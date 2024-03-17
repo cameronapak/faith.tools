@@ -51,9 +51,11 @@ const {
   <body class={`min-h-[100svh] !max-w-[100vw] w-full ${bodyClasses}`}>
     <slot />
     <script>
+      import posthog from 'posthog-js'
       import * as htmx from "htmx.org";
 
       window.htmx = htmx;
+      posthog.init('phc_XZH6DRYJKJsrlBczlu7LB9tMDcXA1rTDupFZYpSYWD4', { api_host: 'https://app.posthog.com' });
     </script>
   </body>
 </html>
