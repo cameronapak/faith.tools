@@ -11,14 +11,18 @@ const { category } = Astro.params;
 const tags = await getListOfTags();
 
 const tagsAsStringArray = tags.map((tag) => tag.value);
-if (!category || !tagsAsStringArray.includes(category)) {
+// I need to now get the category from the URL and add spaces back to it. 
+// Beforehand, I swapped spaces with dashes for better URL readability.
+const categoryWithSpaces = category?.replaceAll("-", " ");
+
+if (!categoryWithSpaces || !tagsAsStringArray.includes(categoryWithSpaces)) {
   return Astro.redirect("/");
 }
 
-const tools = await getListOfTools("", category);
+const tools = await getListOfTools("", categoryWithSpaces);
 
-const title = `faith.tools - The best ${category} digital services and apps for Christians`;
-const description = `A curated list of the best ${category}digital services and apps for Christians and the faithful people who create them.`;
+const title = `faith.tools - The best ${categoryWithSpaces} digital services and apps for Christians`;
+const description = `A curated list of the best ${categoryWithSpaces}digital services and apps for Christians and the faithful people who create them.`;
 
 const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
 
@@ -28,7 +32,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
 
 <Layout title={title} description={description} bodyClasses="bg-slate-100">
   <div class="max-h-screen grid grid-cols-[256px_1fr] max-sm:grid-cols-1">
-    <Sidebar tags={tags} selectedCategoryTag={category} />
+    <Sidebar tags={tags} selectedCategoryTag={categoryWithSpaces} />
 
     <main
       id="main"
@@ -94,7 +98,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
 
       <div class="w-full mt-6">
         <h1 class="text-2xl font-bold text-slate-800">
-          Top Christian {category} Apps and Tools
+          Top Christian {categoryWithSpaces} Apps and Tools
         </h1>
       </div>
 
@@ -115,7 +119,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
             />
           ))
         }
-        <AddAToolCard tagCategory={category} />
+        <AddAToolCard tagCategory={categoryWithSpaces} />
       </section>
       <Footer />
     </main>
