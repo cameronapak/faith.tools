@@ -3,13 +3,14 @@ interface Props {
   tagCategory?: string;
 }
 
-const { tagCategory = '' } = Astro.props;
+const { tagCategory = "" } = Astro.props;
 ---
 
-
-<a href="/add/tool" target="_blank">
-  <section
+<li>
+  <a
     class="flex h-full flex-col items-start gap-3 justify-start border bg-slate-100 border-slate-300 border-dashed p-4 rounded-xl hover:brightness-95 transition-all duration-150"
+    href="/add/tool"
+    target="_blank"
   >
     <div class="flex gap-3 items-center">
       <div
@@ -36,5 +37,5 @@ const { tagCategory = '' } = Astro.props;
       Submit your tool or a tool you recommend to this collection. New tools
       added daily.
     </p>
-  </section>
-</a>
+  </a>
+</li>

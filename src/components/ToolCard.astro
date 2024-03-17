@@ -13,7 +13,7 @@ interface Props {
 const { name, shortDescription, iconUrl, website, tags } = Astro.props;
 ---
 
-<section>
+<li>
   <a
     class="flex w-full h-full flex-col items-start gap-3 justify-start bg-white p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none"
     target="_blank"
@@ -29,9 +29,9 @@ const { name, shortDescription, iconUrl, website, tags } = Astro.props;
         height={48}
         loading="lazy"
       />
-      <h3 class="text-base line-clamp-2 leading-tight font-semibold balanced">
+      <h2 class="text-base line-clamp-2 leading-tight font-semibold balanced">
         {name}
-      </h3>
+      </h2>
     </div>
     <p class="m-0 line-clamp-2 text-xs text-slate-500">{shortDescription}</p>
     <div class="flex flex-wrap gap-2">
@@ -44,4 +44,4 @@ const { name, shortDescription, iconUrl, website, tags } = Astro.props;
       }
     </div>
   </a>
-</section>
+</li>
