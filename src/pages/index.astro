@@ -18,6 +18,10 @@ const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
 
 // Cache for 1 hour.
 Astro.response.headers.set("Cache-Control", "public, max-age=3600");
+Astro.response.headers.set(
+  "CDN-Cache-Control",
+  "public, max-age=3600, stale-while-revalidate",
+);
 ---
 
 <Layout title={title} description={description} bodyClasses="bg-slate-100">
