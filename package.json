@@ -24,7 +24,6 @@
     "@astrojs/tailwind": "^5.1.0",
     "@keystatic/astro": "^5.0.0",
     "@keystatic/core": "^0.5.6",
-    "@sentry/astro": "^7.107.0",
     "@types/alpinejs": "^3.13.9",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
