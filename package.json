@@ -32,6 +32,7 @@
     "astro": "^4.4.15",
     "astro-seo": "^0.8.3",
     "htmx.org": "^1.9.10",
+    "lambda-rate-limiter": "^4.0.0",
     "pocketbase": "^0.21.1",
     "posthog-js": "^1.116.0",
     "react": "^18.2.0",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "@types/lambda-rate-limiter": "^3.0.2",
     "daisyui": "^4.7.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.2"

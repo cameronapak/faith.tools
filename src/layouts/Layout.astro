@@ -1,5 +1,6 @@
 ---
 import { SEO } from "astro-seo";
+import { rateLimit, isDev } from "../utils";
 import "../global.css";
 
 interface Props {
@@ -13,6 +14,19 @@ const {
   description = "Equipping believers with technology to help them live their God-given calling every single day, together",
   bodyClasses,
 } = Astro.props;
+
+const MAX_REQUESTS_PER_MIN = isDev ? 10: 5;
+
+try {
+  await rateLimit(MAX_REQUESTS_PER_MIN, Astro.clientAddress);
+} catch (error) {
+  Astro.response.status = 429;
+  Astro.response.headers.set("Retry-After", "60");
+  Astro.response.headers.set("Content-Type", "text/plain");
+  Astro.response.headers.set("Cache-Control", "public, max-age=3600");
+  Astro.response.statusText = "Not sure if you meant to do that. DDoS protection.";
+  return Astro.response.statusText;
+}
 ---
 
 <!doctype html>
