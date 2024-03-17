@@ -33,15 +33,26 @@ interface ToolsResponse {
   'results': Tool[];
 }
 
-export async function getListOfTools(query: string = '') {
+export async function getListOfTools(query: string = '', tag: string = '') {
   const baseUrl = new URL('https://api.baserow.io/api/database/rows/table/266544/');
+
+  const filters = [
+    {
+      "type": "boolean",
+      "field": "Approved",
+      "value": "1"
+    }
+  ]
+
+  if (tag) {
+    filters.push({ "type": "contains_word", "field": "Tags", "value": tag })
+  }
+
   const searchParams = new URLSearchParams({
     user_field_names: 'true',
     filters: JSON.stringify({
       "filter_type": "AND",
-      "filters": [
-        { "type": "boolean", "field": "Approved", "value": "1" }
-      ],
+      "filters": filters,
       "groups": [],
     }),
     "include": 'Name,Description,Approved,Image,Short Description,Website,Tags',
@@ -75,7 +86,7 @@ export async function getListFields() {
   return data;
 }
 
-export async function getListOfTags() {
+export async function getListOfTags(): Promise<{ id: number, value: string }[]> {
   const listFieldsResponse = await getListFields();
   const tags = listFieldsResponse.filter((field: any) => field.name === 'Tags');
   const tagOptions: { id: number, value: string }[] = tags?.[0]?.select_options;

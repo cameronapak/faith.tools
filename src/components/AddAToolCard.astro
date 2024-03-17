@@ -1,3 +1,11 @@
+---
+interface Props {
+  tagCategory?: string;
+}
+
+const { tagCategory = '' } = Astro.props;
+---
+
 
 <a href="/add/tool" target="_blank">
   <section
@@ -21,7 +29,7 @@
         </svg>
       </div>
       <h3 class="text-base line-clamp-2 leading-tight font-semibold balanced">
-        Your Tool
+        Your {tagCategory} Tool
       </h3>
     </div>
     <p class="m-0 line-clamp-3 text-xs text-slate-500">

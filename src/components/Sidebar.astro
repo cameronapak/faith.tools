@@ -1,0 +1,29 @@
+---
+interface Props {
+  tags: {
+    value: string;
+    id: string | number;
+  }[];
+}
+
+const { tags } = Astro.props;
+---
+
+<aside
+  class="max-sm:hidden max-h-screen overflow-y-auto top-0 left-0 overscroll-contain bg-slate-200"
+>
+  <ul class="flex flex-col border-r border-slate-200">
+    <a href="/">
+      <li class="py-3 ml-6 pr-6 border-b border-slate-300 text-xs m-0">All</li>
+    </a>
+    {
+      tags.map((tag) => (
+        <a href={`/${tag.value}`}>
+          <li class="py-3 ml-6 pr-6 border-b border-slate-300 text-xs m-0">
+            {tag.value}
+          </li>
+        </a>
+      ))
+    }
+  </ul>
+</aside>

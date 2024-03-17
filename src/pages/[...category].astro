@@ -3,16 +3,22 @@ import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
 import AddAToolCard from "../components/AddAToolCard.astro";
-import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
+import Footer from '../components/Footer.astro';
 import { getListOfTools, getListOfTags } from "../api/baserow";
 
-const tools = await getListOfTools();
+const { category } = Astro.params;
 const tags = await getListOfTags();
 
-const title = "faith.tools - The best digital services and apps for Christians";
-const description =
-  "A curated list of the best digital services and apps for Christians and the faithful people who create them.";
+const tagsAsStringArray = tags.map((tag) => tag.value);
+if (!category || !tagsAsStringArray.includes(category)) {
+  return Astro.redirect("/");
+}
+
+const tools = await getListOfTools("", category);
+
+const title = `faith.tools - The best ${category} digital services and apps for Christians`;
+const description = `A curated list of the best ${category}digital services and apps for Christians and the faithful people who create them.`;
 
 const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
 
@@ -30,9 +36,9 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
     >
       <Logo size={128} includeText={false} />
 
-      <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
+      <p class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
         faith.tools
-      </h1>
+      </p>
 
       <div class="flex flex-col gap-2 max-w-[65ch] items-center">
         <p class="balanced m-0 text-center w-full text-slate-800">
@@ -86,8 +92,14 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
         />
       </section>
 
+      <div class="w-full mt-6">
+        <h1 class="text-2xl font-bold text-slate-800">
+          Top Christian {category} Apps and Tools
+        </h1>
+      </div>
+
       <section
-        class="container px-0 max-sm:grid-cols-1 grid grid-cols-3 gap-4 mt-6"
+        class="container px-0 max-sm:grid-cols-1 grid grid-cols-3 gap-4 mt-2"
         id="search-results"
       >
         {
@@ -103,9 +115,8 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
             />
           ))
         }
-        <AddAToolCard />
+        <AddAToolCard tagCategory={category} />
       </section>
-
       <Footer />
     </main>
   </div>

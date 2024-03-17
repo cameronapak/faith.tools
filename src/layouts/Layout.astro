@@ -15,7 +15,7 @@ const {
   bodyClasses,
 } = Astro.props;
 
-const MAX_REQUESTS_PER_MIN = isDev ? 25: 5;
+const MAX_REQUESTS_PER_MIN = isDev ? 50: 5;
 
 try {
   await rateLimit(MAX_REQUESTS_PER_MIN, Astro.clientAddress);
