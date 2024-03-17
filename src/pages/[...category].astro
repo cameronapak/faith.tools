@@ -28,7 +28,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
 
 <Layout title={title} description={description} bodyClasses="bg-slate-100">
   <div class="max-h-screen grid grid-cols-[256px_1fr] max-sm:grid-cols-1">
-    <Sidebar tags={tags} />
+    <Sidebar tags={tags} selectedCategoryTag={category} />
 
     <main
       id="main"
