@@ -7,7 +7,7 @@ interface Props {
   selectedCategoryTag?: string;
 }
 
-const { tags, selectedCategoryTag = '' } = Astro.props;
+const { tags, selectedCategoryTag = "" } = Astro.props;
 ---
 
 <aside
@@ -16,12 +16,30 @@ const { tags, selectedCategoryTag = '' } = Astro.props;
 >
   <ul class="flex flex-col border-r border-slate-200">
     <a href="/" title="View all the Top Christian Apps and Tools">
-      <li class={"hover:bg-slate-300 py-3 px-6 border-b border-slate-300 text-xs m-0" + (selectedCategoryTag === '' ? ' bg-slate-300' : '')}>All</li>
+      <li
+        class={"hover:bg-slate-300 py-3 px-6 border-b border-slate-300 text-xs m-0" +
+          (selectedCategoryTag === "" ? " bg-slate-300" : "")}
+      >
+        All
+      </li>
     </a>
     {
       tags.map((tag) => (
-        <a x-init={selectedCategoryTag === tag.value ? '$refs.sidebar.scrollTo(0, $el.offsetTop - 32);' : ''} href={`/${tag.value.replaceAll(' ', '-')}`} title={`Open the Top Christian ${tag.value} Apps and Tools`}>
-          <li class={"hover:bg-slate-300 transition py-3 px-6 border-b border-slate-300 text-xs m-0" + (selectedCategoryTag === tag.value ? ' bg-slate-300' : '')}>
+        <a
+          x-init={
+            selectedCategoryTag === tag.value
+              ? "$refs.sidebar.scrollTo(0, $el.offsetTop - 32);"
+              : ""
+          }
+          href={`/${tag.value?.replaceAll(" ", "-")}`}
+          title={`Open the Top Christian ${tag.value} Apps and Tools`}
+        >
+          <li
+            class={
+              "hover:bg-slate-300 transition py-3 px-6 border-b border-slate-300 text-xs m-0" +
+              (selectedCategoryTag === tag.value ? " bg-slate-300" : "")
+            }
+          >
             {tag.value}
           </li>
         </a>
