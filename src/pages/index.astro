@@ -32,17 +32,25 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
     <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
       faith.tools
     </h1>
-    <p class="balanced m-0 max-w-[65ch] text-center text-slate-800">
-      The best digital services and apps for Christians and the faithful people
-      who create them.
-    </p>
+
+    <div class="flex flex-col gap-2 max-w-[65ch] items-center">
+      <p class="balanced m-0 text-center w-full text-slate-800">
+        The best digital services and apps for Christians and the faithful
+        people who create them.
+      </p>
+
+      <p class="balanced m-0 text-xs text-center w-full text-slate-600">
+        New tools are added daily and displayed in random order.
+      </p>
+    </div>
 
     <section class="flex flex-col items-center gap-8 mt-4">
       <div class="flex justify-center flex-wrap gap-3">
         <a
           href="/add/tool"
           target="_blank"
-          class="max-sm:w-full btn btn-neutral text-white btn-sm">Recommend a Tool</a
+          class="max-sm:w-full btn btn-neutral text-white btn-sm"
+          >Recommend a Tool</a
         >
         <a
           href="/add/creator"
@@ -75,7 +83,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
         placeholder="Search a tool..."
         class="bg-inherit input input-bordered input-md w-full max-w-md"
       />
-      {/* Tags */} 
+      {/* Tags */}
       <!-- <div class="flex justify-start flex-wrap gap-3">
         {tags.map((tag) => (
           <button class="btn btn-xs btn-outline border-slate-300">{tag.value}</button>
@@ -94,7 +102,7 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
             shortDescription={tool["Short Description"]}
             iconUrl={tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"}
             website={tool["Website"]}
-            tags={tool['Tags']}
+            tags={tool["Tags"]}
           />
         ))
       }
