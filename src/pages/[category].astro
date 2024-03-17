@@ -4,14 +4,14 @@ import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
 import AddAToolCard from "../components/AddAToolCard.astro";
 import Sidebar from "../components/Sidebar.astro";
-import Footer from '../components/Footer.astro';
+import Footer from "../components/Footer.astro";
 import { getListOfTools, getListOfTags } from "../api/baserow";
 
 const { category } = Astro.params;
 const tags = await getListOfTags();
 
 const tagsAsStringArray = tags.map((tag) => tag.value);
-// I need to now get the category from the URL and add spaces back to it. 
+// I need to now get the category from the URL and add spaces back to it.
 // Beforehand, I swapped spaces with dashes for better URL readability.
 const categoryWithSpaces = category?.replaceAll("-", " ");
 
@@ -71,13 +71,13 @@ Astro.response.headers.set("Cache-Control", "public, max-age=3600");
           >
           <button
             x-data={`{
-            openRandomToolInNewTab() {
-              const toolsSectionEl = document.getElementById('search-results');
-              const allToolEls = Array.from(toolsSectionEl.querySelectorAll('a'));
-              const randomToolEl = allToolEls[Math.floor(Math.random() * allToolEls.length)];
-              window.open(randomToolEl.href, '_blank');
-            }
-          }`}
+              openRandomToolInNewTab() {
+                const toolsSectionEl = document.getElementById('search-results');
+                const allToolEls = Array.from(toolsSectionEl.querySelectorAll('a'));
+                const randomToolEl = allToolEls[Math.floor(Math.random() * allToolEls.length)];
+                window.open(randomToolEl.href, '_blank');
+              }
+            }`}
             type="button"
             x-on:click="openRandomToolInNewTab()"
             class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
