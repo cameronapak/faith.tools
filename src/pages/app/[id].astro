@@ -5,9 +5,17 @@ import { getSingleTool, type Tool } from "../../api/baserow";
 
 const { id } = Astro.params as { id: string };
 
+// The `id` is structured like 123-name-of-tool, but 
+// I only need the number. This is to help with SEO.
+const idAsNumber = id.match(/(\d+)/ig)?.[0];
+
+if (!idAsNumber) {
+  return Astro.redirect("/", 301);
+}
+
 let app: Tool | undefined;
 try {
-  app = await getSingleTool(id);
+  app = await getSingleTool(idAsNumber);
 } catch {
   return Astro.redirect("/", 301);
 }

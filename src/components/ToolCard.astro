@@ -18,7 +18,7 @@ const { name, shortDescription, iconUrl, website, tags, appId } = Astro.props;
   <a
     class="flex w-full h-full flex-col items-start gap-3 justify-start bg-white p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none"
     target="_blank"
-    href={`/app/${appId}`}
+    href={`/app/${appId}` + "-" + name.replaceAll(" ", "-").toLocaleLowerCase()}
     title={`Learn more about ${name} on ${website}`}
   >
     <div class="flex gap-3 items-center">
