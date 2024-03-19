@@ -36,6 +36,18 @@ Astro.response.headers.set(
       },
       init() {
         this.resetSidePanel();
+
+        $watch('isSidePanelOpen', () => {
+          if (!isMobile) {
+            return;
+          }
+          
+          if (this.isSidePanelOpen) {
+            $refs.mainContent.classList.add('!overflow-hidden');
+          } else {
+            $refs.mainContent.classList.remove('!overflow-hidden');
+          }
+        })
       }
     }`}
     x-on:window.resize.debounce="resetSidePanel()"
@@ -44,6 +56,7 @@ Astro.response.headers.set(
     <Sidebar tags={tags} />
 
     <main
+      x-ref="mainContent"
       id="main"
       class="relative max-h-screen overflow-y-auto container py-12 p-6 flex flex-col justify-start gap-4 items-center"
     >
