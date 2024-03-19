@@ -25,3 +25,8 @@
 .breadcrumbs > ol > li {
   @apply p-0;
 }
+
+/* AlpineJS helper */
+[x-cloak] {
+  display: none;
+}

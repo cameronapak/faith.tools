@@ -25,13 +25,86 @@ Astro.response.headers.set(
 ---
 
 <Layout title={title} description={description} bodyClasses="bg-slate-100">
-  <div class="max-h-screen grid grid-cols-[256px_1fr] max-sm:grid-cols-1">
+  <div
+    x-data={`{
+      isSidePanelOpen: true,
+      get isMobile() {
+        return Boolean(window.innerWidth <= 768);
+      },
+      resetSidePanel() {
+        this.isSidePanelOpen = !this.isMobile;
+      },
+      init() {
+        this.resetSidePanel();
+      }
+    }`}
+    x-on:window.resize.debounce="resetSidePanel()"
+    class="max-h-screen flex"
+  >
     <Sidebar tags={tags} />
 
     <main
       id="main"
-      class="max-h-screen overflow-y-auto container py-12 p-6 flex flex-col justify-start gap-4 items-center"
+      class="relative max-h-screen overflow-y-auto container py-12 p-6 flex flex-col justify-start gap-4 items-center"
     >
+      {/* Backdrop */}
+      <div
+        x-show="isSidePanelOpen"
+        x-cloak
+        class="sm:hidden absolute top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/50"
+      >
+      </div>
+
+      <button
+        title="Toggle category sidebar"
+        x-on:click="isSidePanelOpen = !isSidePanelOpen"
+        class="absolute bg-inherit top-4 left-4 btn btn-circle btn-outline text-slate-600 hover:bg-slate-200 hover:border-inherit hover:text-slate-800 border-slate-300"
+        x-bind:class="{ 'max-sm:left-[calc(256px+1rem)] max-sm:bg-white': isSidePanelOpen }"
+      >
+        <svg
+          x-cloak
+          x-show="!isSidePanelOpen"
+          xmlns="http://www.w3.org/2000/svg"
+          width={28}
+          height={28}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          >
+            <path d="M9 3.5v17M14 9l3 3l-3 3"></path>
+            <path
+              d="M3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3c4.243 0 6.364 0 7.682 1.318C21 5.636 21 7.758 21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12"
+            ></path>
+          </g>
+        </svg>
+
+        <svg
+          x-show="isSidePanelOpen"
+          xmlns="http://www.w3.org/2000/svg"
+          width={28}
+          height={28}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          >
+            <path d="M9 3.5v17m7-5.5l-3-3l3-3"></path>
+            <path
+              d="M3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3c4.243 0 6.364 0 7.682 1.318C21 5.636 21 7.758 21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12"
+            ></path>
+          </g>
+        </svg>
+      </button>
+
       <Logo size={128} includeText={false} />
 
       <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">

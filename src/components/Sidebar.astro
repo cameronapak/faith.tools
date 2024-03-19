@@ -9,12 +9,21 @@ interface Props {
   selectedCategoryTag?: string;
 }
 
-const { tags, selectedCategoryTag = "" } = Astro.props;
+const { tags, selectedCategoryTag = "", ...props } = Astro.props;
 ---
 
 <aside
-  class="max-sm:hidden max-h-screen overflow-y-auto top-0 left-0 overscroll-contain bg-slate-200"
+  {...props}
+  x-show="isSidePanelOpen"
+  x-transition:enter="transition ease-in-out duration-150"
+  x-transition:enter-start="-translate-x-[100%]"
+  x-transition:enter-end="translate-x-0"
+  x-transition:leave="transition ease-in-out duration-150"
+  x-transition:leave-start="translate-x-0"
+  x-transition:leave-end="-translate-x-[100%]"
+  class="max-sm:hidden w-[256px] max-sm:shadow-xl max-sm:absolute max-sm:top-0 max-sm:left-0 max-sm:bottom-0 max-sm:z-20 max-h-screen overflow-y-auto top-0 left-0 overscroll-contain bg-slate-200"
   x-ref="sidebar"
+  x-init="$el.classList.remove('max-sm:hidden');"
 >
   <ul class="flex flex-col border-r border-slate-200">
     <SidebarListItem
