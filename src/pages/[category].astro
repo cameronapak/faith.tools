@@ -34,7 +34,7 @@ Astro.response.headers.set(
 );
 ---
 
-<Layout title={title} description={description} bodyClasses="bg-slate-100">
+<Layout title={title} description={description} bodyClasses="overflow-x-hidden bg-slate-100">
   <div
     x-data={`{
       isSidePanelOpen: true,
@@ -69,9 +69,9 @@ Astro.response.headers.set(
     <main
       x-ref="mainContent"
       id="main"
-      class="relative transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
+      class="relative overflow-x-hidden transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
     >
-      <header class="ml-2 container mx-auto flex justify-between gap-2">
+      <header class="ml-8 w-[calc(100%-32px)] !px-0 container mx-auto flex justify-between gap-2">
         <Logo />
         <div class="flex justify-center flex-wrap gap-3">
           <a
@@ -108,6 +108,7 @@ Astro.response.headers.set(
       <div
         x-show="isSidePanelOpen"
         x-cloak
+        @click="isSidePanelOpen ? isSidePanelOpen = false : null"
         class="sm:hidden absolute top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/50"
       >
       </div>
