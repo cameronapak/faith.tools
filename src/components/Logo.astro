@@ -7,7 +7,11 @@ interface Props {
 const { includeText = true, size = 48 } = Astro.props;
 ---
 
-<a href="/" title="Go to the home page" class="transition-transform duration-150 active:scale-95">
+<a
+  href="/"
+  title="Go to the home page"
+  class="transition-transform duration-150 active:scale-95"
+>
   <div class="flex items-center gap-3">
     <svg
       width={size}
@@ -64,8 +68,7 @@ const { includeText = true, size = 48 } = Astro.props;
     {
       includeText ? (
         <p class="flex items-baseline gap-1 text-2xl font-bold max-sm:flex-col">
-          faith.tools{" "}
-          <span class="text-sm text-slate-500 font-normal">(beta)</span>
+          faith.tools
         </p>
       ) : null
     }

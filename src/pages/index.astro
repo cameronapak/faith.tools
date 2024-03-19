@@ -58,50 +58,22 @@ Astro.response.headers.set(
       <button
         title="Toggle category sidebar"
         x-on:click="isSidePanelOpen = !isSidePanelOpen"
-        class="absolute bg-inherit top-4 left-4 btn btn-circle btn-outline text-slate-600 hover:bg-slate-200 hover:border-inherit hover:text-slate-800 border-slate-300"
+        class="absolute top-4 left-4 btn btn-circle btn-sm border-none bg-inherit text-slate-600 hover:bg-slate-200 hover:border-inherit hover:text-slate-800 border-slate-300"
         x-bind:class="{ 'max-sm:left-[calc(256px+1rem)] max-sm:bg-white': isSidePanelOpen }"
       >
         <svg
-          x-cloak
-          x-show="!isSidePanelOpen"
+          class="transition-transform duration-300"
+          x-bind:class="{ '-rotate-180': !isSidePanelOpen }"
           xmlns="http://www.w3.org/2000/svg"
-          width={28}
-          height={28}
-          viewBox="0 0 24 24"
+          width={20}
+          height={20}
+          viewBox="0 0 16 16"
         >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-          >
-            <path d="M9 3.5v17M14 9l3 3l-3 3"></path>
-            <path
-              d="M3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3c4.243 0 6.364 0 7.682 1.318C21 5.636 21 7.758 21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12"
-            ></path>
-          </g>
-        </svg>
-
-        <svg
-          x-show="isSidePanelOpen"
-          xmlns="http://www.w3.org/2000/svg"
-          width={28}
-          height={28}
-          viewBox="0 0 24 24"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-          >
-            <path d="M9 3.5v17m7-5.5l-3-3l3-3"></path>
-            <path
-              d="M3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3c4.243 0 6.364 0 7.682 1.318C21 5.636 21 7.758 21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12"
-            ></path>
-          </g>
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M10.53 2.97a.75.75 0 0 1 0 1.06L6.56 8l3.97 3.97a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 0"
+            clip-rule="evenodd"></path>
         </svg>
       </button>
 
@@ -158,7 +130,7 @@ Astro.response.headers.set(
           hx-target="#search-results"
           hx-get="/api/htmx-partials/ListOfTools"
           type="text"
-          placeholder="Search a tool..."
+          placeholder="Search all tools..."
           class="bg-inherit input input-bordered input-md w-full max-w-md"
         />
       </section>

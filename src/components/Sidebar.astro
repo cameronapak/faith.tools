@@ -25,7 +25,7 @@ const { tags, selectedCategoryTag = "", ...props } = Astro.props;
   x-ref="sidebar"
   x-init="$el.classList.remove('max-sm:hidden');"
 >
-  <ul class="flex flex-col border-r border-slate-200">
+  <ul class="flex flex-col sm:shadow-inner">
     <SidebarListItem
       isSelected={selectedCategoryTag === ""}
       text="All"

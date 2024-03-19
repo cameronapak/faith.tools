@@ -35,43 +35,43 @@ Astro.response.headers.set(
 ---
 
 <Layout title={title} description={description} bodyClasses="bg-slate-100">
-  <div class="max-h-screen grid grid-cols-[256px_1fr] max-sm:grid-cols-1">
+  <div
+    x-data={`{
+      isSidePanelOpen: true,
+      get isMobile() {
+        return Boolean(window.innerWidth <= 768);
+      },
+      resetSidePanel() {
+        this.isSidePanelOpen = !this.isMobile;
+      },
+      search: "",
+      init() {
+        this.resetSidePanel();
+      }
+    }`}
+    x-on:window.resize.debounce="resetSidePanel()"
+    class="max-h-screen flex"
+  >
     <Sidebar tags={tags} selectedCategoryTag={categoryWithSpaces} />
 
     <main
       id="main"
-      class="max-h-screen overflow-y-auto container py-12 p-6 flex flex-col justify-start gap-4 items-center"
+      class="relative transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
     >
-      <Logo size={128} includeText={false} />
-
-      <p class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
-        faith.tools
-      </p>
-
-      <div class="flex flex-col gap-2 max-w-[65ch] items-center">
-        <p class="balanced m-0 text-center w-full text-slate-800">
-          The best digital services and apps for Christians and the faithful
-          people who create them.
-        </p>
-
-        <p class="balanced m-0 text-xs text-center w-full text-slate-600">
-          New tools are added daily and displayed in random order.
-        </p>
-      </div>
-
-      <section class="flex flex-col items-center gap-8 mt-4">
+      <header class="ml-2 container mx-auto flex justify-between gap-2">
+        <Logo />
         <div class="flex justify-center flex-wrap gap-3">
           <a
             href="/add/tool"
             target="_blank"
-            class="max-sm:w-full btn btn-neutral text-white btn-sm"
-            >Recommend a Tool</a
+            class="max-sm:w-fit btn btn-neutral text-white btn-sm"
+            >Add Tool</a
           >
           <a
             href="/add/creator"
             target="_blank"
-            class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
-            >Recommend a Creator</a
+            class="max-sm:hidden btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+            >Add Creator</a
           >
           <button
             x-data={`{
@@ -84,21 +84,42 @@ Astro.response.headers.set(
             }`}
             type="button"
             x-on:click="openRandomToolInNewTab()"
-            class="max-sm:w-full btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+            class="max-sm:hidden btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
           >
             Suprise Me
           </button>
         </div>
-        <input
-          name="search"
-          hx-trigger="keyup changed delay:500ms"
-          hx-target="#search-results"
-          hx-get="/api/htmx-partials/ListOfTools"
-          type="text"
-          placeholder="Search a tool..."
-          class="bg-inherit input input-bordered input-md w-full max-w-md"
-        />
-      </section>
+      </header>
+
+      {/* Backdrop */}
+      <div
+        x-show="isSidePanelOpen"
+        x-cloak
+        class="sm:hidden absolute top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/50"
+      >
+      </div>
+
+      <button
+        title="Toggle category sidebar"
+        x-on:click="isSidePanelOpen = !isSidePanelOpen"
+        class="absolute top-6.5 left-4 btn btn-circle btn-sm border-none bg-inherit text-slate-600 hover:bg-slate-200 hover:border-inherit hover:text-slate-800 border-slate-300"
+        x-bind:class="{ 'max-sm:left-[calc(256px+1rem)] max-sm:bg-white': isSidePanelOpen }"
+      >
+        <svg
+          class="transition-transform duration-300"
+          x-bind:class="{ '-rotate-180': !isSidePanelOpen }"
+          xmlns="http://www.w3.org/2000/svg"
+          width={20}
+          height={20}
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M10.53 2.97a.75.75 0 0 1 0 1.06L6.56 8l3.97 3.97a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 0"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
 
       <div class="w-full mt-6">
         <a
@@ -119,9 +140,21 @@ Astro.response.headers.set(
           </svg>
           View All
         </a>
-        <h1 class="text-2xl font-bold text-slate-800 mt-2">
+
+        <h1 class="balanced text-2xl font-bold text-slate-800 mt-2" x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}>
           Top Christian {categoryWithSpaces} Apps and Tools
         </h1>
+
+        <input
+          x-model="search"
+          name="search"
+          hx-trigger="keyup changed delay:500ms"
+          hx-target="#search-results"
+          hx-get="/api/htmx-partials/ListOfTools"
+          type="text"
+          placeholder="Search all tools..."
+          class="mt-4 bg-inherit input input-bordered input-md w-full max-w-sm"
+        />
       </div>
 
       <ul

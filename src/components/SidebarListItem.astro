@@ -9,7 +9,7 @@ interface Props {
 const { isSelected, text, title, link, ...props } = Astro.props;
 ---
 
-<li class={`hover:bg-slate-300 border-b border-slate-300 text-xs m-0 ${isSelected ? " bg-slate-300" : ""}`} {...props}>
+<li class={`hover:bg-slate-300 border-b border-slate-300 text-xs m-0 ${isSelected ? " !bg-slate-300" : ""}`} {...props}>
   <a
     class="py-3 px-6 w-full h-full block"
     href={link}
