@@ -1,4 +1,4 @@
-type Tool = {
+export type Tool = {
   'id': number;
   'Name': string;
   'Description': string;
@@ -64,10 +64,26 @@ export async function getListOfTools(query: string = '', tag: string = '') {
     headers: {
       'Content-Type': 'application/json',
       Authorization: "Token " + import.meta.env.BASEROW_API_KEY,
+      'Cache-Control': 'max-age=3600',
     },
   })
 
   const data: ToolsResponse = await response.json();
+
+  return data;
+}
+
+export async function getSingleTool(id: number | string): Promise<Tool> {
+  const response = await fetch('https://api.baserow.io/api/database/rows/table/266544/' + id + '/?user_field_names=true', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "Token " + import.meta.env.BASEROW_API_KEY,
+      'Cache-Control': 'max-age=3600',
+    },
+  })
+
+  const data: Tool = await response.json();
 
   return data;
 }
@@ -78,6 +94,7 @@ export async function getListFields() {
     headers: {
       'Content-Type': 'application/json',
       Authorization: "Token " + import.meta.env.BASEROW_API_KEY,
+      'Cache-Control': 'max-age=3600',
     },
   })
 

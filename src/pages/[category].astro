@@ -52,7 +52,7 @@ Astro.response.headers.set(
           if (!isMobile) {
             return;
           }
-          
+
           if (this.isSidePanelOpen) {
             $refs.mainContent.classList.add('!overflow-hidden');
           } else {
@@ -182,6 +182,7 @@ Astro.response.headers.set(
               iconUrl={
                 tool["Image"]?.[0]?.url || "https://placeholder.com/48x48"
               }
+              appId={tool["id"]}
               website={tool["Website"]}
               tags={tool["Tags"]}
             />

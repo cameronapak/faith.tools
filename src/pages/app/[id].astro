@@ -1,0 +1,118 @@
+---
+import Logo from "../../components/Logo.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getSingleTool, type Tool } from "../../api/baserow";
+
+const { id } = Astro.params as { id: string };
+
+let app: Tool | undefined;
+try {
+  app = await getSingleTool(id);
+} catch {
+  return Astro.redirect("/", 301);
+}
+
+const headTitle = `Get ${app["Name"]} on faith.tools`;
+const headDescription = app["Short Description"];
+
+// Cache for 1 hour.
+Astro.response.headers.set("Cache-Control", "public, max-age=3600");
+Astro.response.headers.set(
+  "CDN-Cache-Control",
+  "public, max-age=3600, stale-while-revalidate",
+);
+---
+
+<Layout
+  bodyClasses="bg-slate-100 grid grid-rows-[auto_1fr_auto]"
+  title={headTitle}
+  description={headDescription}
+>
+  <header class="p-6 container mx-auto flex justify-between gap-2">
+    <Logo />
+  </header>
+
+  <section class="mx-auto p-6 w-full prose unset-max-width !container">
+    <a
+      href="/"
+      class="btn bg-slate-200 hover:bg-slate-300 border-none btn-xs pr-4"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={16}
+        height={16}
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M9.78 4.22a.75.75 0 0 1 0 1.06L7.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06L5.47 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.75.75 0 0 1 1.06 0"
+          clip-rule="evenodd"></path>
+      </svg>
+      Find More Tools
+    </a>
+    <img
+      class="mt-4 rounded-3xl max-sm:mx-auto m-0 max-sm:w-full max-sm:max-w-[256px] bg-white object-cover shadow-md"
+      src={app.Image?.[0]?.url}
+      alt={app.Name}
+      width={128}
+      height={128}
+      loading="lazy"
+    />
+    <div
+      class="grid sm:grid-cols-[1fr_auto] max-sm:grid-rows-[auto_auto] max-sm:gap-6 items-center sm:gap-4 !mt-6"
+    >
+      <h1 class="balanced max-sm:text-center">{app.Name}</h1>
+      <a
+        title={`Visit ${app.Name} on ${app.Website}`}
+        href={app.Website}
+        target="_blank"
+        class="px-6 max-sm:w-full sm:w-fit btn btn-neutral text-white btn-xl"
+      >
+        Get Tool
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={16}
+          height={16}
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4m-8-2l8-8m0 0v5m0-5h-5"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="flex flex-wrap gap-3 mt-2 max-sm:mt-4">
+      {
+        app.Tags?.map((tag) => (
+          <a
+            title={`View the Top Christian ${tag.value} Apps and Tools`}
+            href={`/${tag.value.replaceAll(" ", "-")}`}
+            class="no-underline badge badge-outline h-8 badge-md hover:bg-slate-200 border-slate-300 text-slate-600"
+          >
+            {tag.value}
+          </a>
+        ))
+      }
+    </div>
+    <p>{app["Short Description"]}</p>
+    <p class="text-xs text-slate-500">
+      By installing or using {app.Name}, you are subject to their Terms of Use
+      and/or Privacy Policy.
+    </p>
+  </section>
+  <footer class="container mx-auto p-6 w-full">
+    <p class="text-center text-xs text-slate-500">
+      faith.tools is created by <a
+        class="link inherit"
+        href="https://cameronpak.com"
+        target="_blank">Cameron Pak</a
+      > in collaboration with you. © {new Date().getFullYear()}
+    </p>
+  </footer>
+</Layout>

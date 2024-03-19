@@ -4,20 +4,21 @@ interface Props {
   shortDescription: string;
   iconUrl: string;
   website: string;
+  appId: string | number;
   tags: {
     value: string;
     id: string | number;
   }[];
 }
 
-const { name, shortDescription, iconUrl, website, tags } = Astro.props;
+const { name, shortDescription, iconUrl, website, tags, appId } = Astro.props;
 ---
 
 <li>
   <a
     class="flex w-full h-full flex-col items-start gap-3 justify-start bg-white p-4 rounded-xl hover:shadow-md transition-all duration-150 underline-none"
     target="_blank"
-    href={website}
+    href={`/app/${appId}`}
     title={`Learn more about ${name} on ${website}`}
   >
     <div class="flex gap-3 items-center">

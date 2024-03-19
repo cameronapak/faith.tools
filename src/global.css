@@ -15,6 +15,10 @@
   text-wrap: balance;
 }
 
+.prose.unset-max-width {
+  max-width: inherit;
+}
+
 .balanced {
   max-inline-size: 50ch;
   text-wrap: balance;
