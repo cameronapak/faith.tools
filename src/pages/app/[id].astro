@@ -28,11 +28,11 @@ Astro.response.headers.set(
   title={headTitle}
   description={headDescription}
 >
-  <header class="p-6 container mx-auto flex justify-between gap-2">
+  <header class="max-w-[65ch] p-6 container mx-auto flex justify-between gap-2">
     <Logo />
   </header>
 
-  <section class="mx-auto p-6 w-full prose unset-max-width !container">
+  <section class="mx-auto p-6 w-full prose">
     <a
       href="/"
       class="btn bg-slate-200 hover:bg-slate-300 border-none btn-xs pr-4"
@@ -87,7 +87,7 @@ Astro.response.headers.set(
         </svg>
       </a>
     </div>
-    <div class="flex flex-wrap gap-3 mt-2 max-sm:mt-4">
+    <div class="flex flex-wrap gap-3 max-sm:mt-2 sm:mt-3 max-sm:mt-4">
       {
         app.Tags?.map((tag) => (
           <a
