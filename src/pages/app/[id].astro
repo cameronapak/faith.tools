@@ -35,6 +35,7 @@ Astro.response.headers.set(
   bodyClasses="bg-slate-100 grid grid-rows-[auto_1fr_auto]"
   title={headTitle}
   description={headDescription}
+  faviconUrl={app.Image?.[0]?.thumbnails.tiny.url || ''}
 >
   <header class="max-w-[65ch] p-6 container mx-auto flex justify-between gap-2">
     <Logo />

@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   bodyClasses?: string;
   canonicalUrl?: string;
+  faviconUrl?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "Equipping believers with technology to help them live their God-given calling every single day, together",
   bodyClasses,
   canonicalUrl,
+  faviconUrl,
 } = Astro.props;
 
 const MAX_REQUESTS_PER_MIN = isDev ? 50 : 15;
@@ -27,7 +29,8 @@ if (!isDev) {
     Astro.response.headers.set("Retry-After", "60");
     Astro.response.headers.set("Content-Type", "text/plain");
     Astro.response.headers.set("Cache-Control", "public, max-age=3600");
-    Astro.response.statusText = "Not sure if you meant to do that. DDoS protection.";
+    Astro.response.statusText =
+      "Not sure if you meant to do that. DDoS protection.";
     return Astro.response.statusText;
   }
 }
@@ -60,7 +63,13 @@ if (!isDev) {
         image: "/og-image.png",
       }}
       extend={{
-        link: [{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+        link: [
+          {
+            rel: "icon",
+            href: faviconUrl || "/favicon.svg",
+            type: faviconUrl ? "image/png" : "image/svg+xml",
+          },
+        ],
         meta: [{ name: "theme-color", content: "#ffffff" }],
       }}
     />
@@ -69,11 +78,13 @@ if (!isDev) {
   <body class={`min-h-[100svh] !max-w-[100vw] w-full ${bodyClasses}`} x-data>
     <slot />
     <script>
-      import posthog from 'posthog-js'
+      import posthog from "posthog-js";
       import * as htmx from "htmx.org";
 
       window.htmx = htmx;
-      posthog.init('phc_XZH6DRYJKJsrlBczlu7LB9tMDcXA1rTDupFZYpSYWD4', { api_host: 'https://app.posthog.com' });
+      posthog.init("phc_XZH6DRYJKJsrlBczlu7LB9tMDcXA1rTDupFZYpSYWD4", {
+        api_host: "https://app.posthog.com",
+      });
     </script>
   </body>
 </html>

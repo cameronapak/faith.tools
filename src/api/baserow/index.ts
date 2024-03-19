@@ -1,3 +1,8 @@
+type Thumbnails = {
+  tiny: { url: string; name: string };
+  small: { url: string; name: string };
+}
+
 export type Tool = {
   'id': number;
   'Name': string;
@@ -5,10 +10,7 @@ export type Tool = {
   'Approved': boolean;
   'Image': {
     'url': string;
-    'thumbnails': {
-      'url': string;
-      'name': string;
-    }[];
+    thumbnails: Thumbnails;
     'visible_name': string;
     'name': string;
     'size': number;
