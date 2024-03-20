@@ -21,6 +21,10 @@ try {
   return Astro.redirect("/", 301);
 }
 
+if (!app || app.error) {
+  return Astro.redirect("/", 301);
+}
+
 const headTitle = `Get ${app["Name"]} on faith.tools`;
 const headDescription = app["Short Description"];
 const ogImageUrl =

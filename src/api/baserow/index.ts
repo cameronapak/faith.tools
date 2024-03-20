@@ -26,6 +26,8 @@ export type Tool = {
     'value': string;
   }[];
   'Website': string;
+  error?: string;
+  detail?: string;
 }
 
 interface ToolsResponse {
