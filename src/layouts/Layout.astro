@@ -9,6 +9,7 @@ interface Props {
   bodyClasses?: string;
   canonicalUrl?: string;
   faviconUrl?: string;
+  ogImageUrl?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   bodyClasses,
   canonicalUrl,
   faviconUrl,
+  ogImageUrl = "/og-image.png",
 } = Astro.props;
 
 const MAX_REQUESTS_PER_MIN = isDev ? 50 : 15;
@@ -56,7 +58,7 @@ if (!isDev) {
         basic: {
           title: title,
           type: "website",
-          image: "/og-image.png",
+          image: ogImageUrl,
         },
         image: {
           alt: "A Christian fish logo with one of the two lines of the fish as a dotted line.",
@@ -64,7 +66,7 @@ if (!isDev) {
       }}
       twitter={{
         card: "summary_large_image",
-        image: "/og-image.png",
+        image: ogImageUrl,
       }}
       extend={{
         link: [

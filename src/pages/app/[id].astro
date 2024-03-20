@@ -5,9 +5,9 @@ import { getSingleTool, type Tool } from "../../api/baserow";
 
 const { id } = Astro.params as { id: string };
 
-// The `id` is structured like 123-name-of-tool, but 
+// The `id` is structured like 123-name-of-tool, but
 // I only need the number. This is to help with SEO.
-const idAsNumber = id.match(/(\d+)/ig)?.[0];
+const idAsNumber = id.match(/(\d+)/gi)?.[0];
 
 if (!idAsNumber) {
   return Astro.redirect("/", 301);
@@ -22,6 +22,9 @@ try {
 
 const headTitle = `Get ${app["Name"]} on faith.tools`;
 const headDescription = app["Short Description"];
+const ogImageUrl =
+  "https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=https://faith.tools/app/" +
+  id;
 
 // Cache for 1 hour.
 Astro.response.headers.set("Cache-Control", "public, max-age=3600");
@@ -35,7 +38,8 @@ Astro.response.headers.set(
   bodyClasses="bg-slate-100 grid grid-rows-[auto_1fr_auto]"
   title={headTitle}
   description={headDescription}
-  faviconUrl={app.Image?.[0]?.thumbnails.tiny.url || ''}
+  ogImageUrl={ogImageUrl}
+  faviconUrl={app.Image?.[0]?.thumbnails.tiny.url || ""}
 >
   <header class="max-w-[65ch] p-6 container mx-auto flex justify-between gap-2">
     <Logo />

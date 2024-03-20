@@ -24,6 +24,8 @@ const tools = await getListOfTools("", categoryWithSpaces);
 const title = `faith.tools - The best ${categoryWithSpaces} digital services and apps for Christians`;
 const description = `A curated list of the best ${categoryWithSpaces} digital services and apps for Christians and the faithful people who create them.`;
 
+const ogImageUrl = `https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=https://faith.tools/${category}`;
+
 const randomizeTools = tools.results.sort(() => Math.random() - 0.5);
 
 // Cache for 1 hour.
@@ -34,7 +36,12 @@ Astro.response.headers.set(
 );
 ---
 
-<Layout title={title} description={description} bodyClasses="overflow-x-hidden bg-slate-100">
+<Layout
+  ogImageUrl={ogImageUrl}
+  title={title}
+  description={description}
+  bodyClasses="overflow-x-hidden bg-slate-100"
+>
   <div
     x-data={`{
       isSidePanelOpen: true,
@@ -71,14 +78,15 @@ Astro.response.headers.set(
       id="main"
       class="relative overflow-x-hidden transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
     >
-      <header class="ml-8 w-[calc(100%-32px)] !px-0 container mx-auto flex justify-between gap-2">
+      <header
+        class="ml-8 w-[calc(100%-32px)] !px-0 container mx-auto flex justify-between gap-2"
+      >
         <Logo />
         <div class="flex justify-center flex-wrap gap-3">
           <a
             href="/add/tool"
             target="_blank"
-            class="max-sm:w-fit btn btn-neutral text-white btn-sm"
-            >Add Tool</a
+            class="max-sm:w-fit btn btn-neutral text-white btn-sm">Add Tool</a
           >
           <a
             href="/add/creator"
@@ -155,7 +163,10 @@ Astro.response.headers.set(
           View All
         </a>
 
-        <h1 class="balanced text-2xl font-bold text-slate-800 mt-2" x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}>
+        <h1
+          class="balanced text-2xl font-bold text-slate-800 mt-2"
+          x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}
+        >
           Top Christian {categoryWithSpaces} Apps and Tools
         </h1>
 
