@@ -59,6 +59,7 @@ export async function getListOfTools(query: string = '', tag: string = '') {
     }),
     "include": 'Name,Description,Approved,Image,Short Description,Website,Tags',
     search: query,
+    size: '200'
   })
 
   const response = await fetch(baseUrl.toString() + '?' + searchParams, {

@@ -24,7 +24,11 @@ Astro.response.headers.set(
 );
 ---
 
-<Layout title={title} description={description} bodyClasses="overflow-x-hidden bg-slate-100">
+<Layout
+  title={title}
+  description={description}
+  bodyClasses="overflow-x-hidden bg-slate-100"
+>
   <div
     x-data={`{
       isSidePanelOpen: true,
