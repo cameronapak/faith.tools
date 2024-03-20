@@ -173,6 +173,21 @@ Astro.response.headers.set(
         <AddAToolCard />
       </ul>
 
+      <!-- {
+        tools.next ? (
+          <button
+            class="btn btn-sm"
+            id="btn-load-more"
+            hx-get={"/api/htmx-partials/ListOfTools?page=2"}
+            hx-target="#search-results"
+            hx-swap="afterend"
+            hx-trigger="click"
+          >
+            Load More
+          </button>
+        ) : null
+      } -->
+
       <Footer />
     </main>
   </div>
