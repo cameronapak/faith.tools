@@ -3,6 +3,7 @@ import ToolCard from "../components/ToolCard.astro";
 import Layout from "../layouts/Layout.astro";
 import Logo from "../components/Logo.astro";
 import AddAToolCard from "../components/AddAToolCard.astro";
+import ShareCurrentLinkButton from "../components/ShareCurrentLinkButton.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
 import { getListOfTools, getListOfTags } from "../api/baserow";
@@ -163,12 +164,15 @@ Astro.response.headers.set(
           View All
         </a>
 
-        <h1
-          class="balanced text-2xl font-bold text-slate-800 mt-2"
-          x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}
-        >
-          Top Christian {categoryWithSpaces} Apps and Tools
-        </h1>
+        <div class="flex gap-3 items-center mt-2">
+          <h1
+            class="balanced text-2xl font-bold text-slate-800"
+            x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}
+          >
+            Top Christian {categoryWithSpaces} Apps and Tools
+          </h1>
+          <ShareCurrentLinkButton size="sm" />
+        </div>
 
         <input
           x-model="search"

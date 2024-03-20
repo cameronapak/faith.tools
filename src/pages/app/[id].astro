@@ -1,6 +1,7 @@
 ---
 import Logo from "../../components/Logo.astro";
 import Layout from "../../layouts/Layout.astro";
+import ShareCurrentLinkButton from "../../components/ShareCurrentLinkButton.astro";
 import { getSingleTool, type Tool } from "../../api/baserow";
 
 const { id } = Astro.params as { id: string };
@@ -77,43 +78,7 @@ Astro.response.headers.set(
     >
       <h1 class="balanced max-sm:text-center">{app.Name}</h1>
       <div class="grid grid-cols-[auto_1fr] items-center gap-3 w-full">
-        <button
-          type="button"
-          title="Share"
-          x-data={`{
-            shareTool() {
-              if (navigator.share) {
-                navigator.share({
-                  title: document.title,
-                  url: window.location.href
-                }).then(() => {
-                  console.log('Thanks for sharing!');
-                }).catch(console.error);
-              } else {
-                navigator.clipboard.writeText(window.location.href); 
-                setTimeout(() => alert('Link has been copied to your clipboard. Paste to share!'), 500);
-              }
-            }
-          }`}
-          class="btn btn-circle btn-outline hover:bg-slate-200 border-slate-300 text-slate-600 hover:text-slate-600 hover:border-slate-300 btn-md"
-          x-on:click="shareTool()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 5v8.5M15 7l-3-3l-3 3m-4 5v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"
-            ></path>
-          </svg>
-        </button>
+        <ShareCurrentLinkButton />
         <a
           title={`Visit ${app.Name} on ${app.Website}`}
           href={app.Website}
