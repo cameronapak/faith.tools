@@ -63,13 +63,14 @@ Astro.response.headers.set(
     <main
       x-ref="mainContent"
       id="main"
-      class="relative max-h-screen overflow-y-auto overflow-x-hidden container py-12 p-6 flex flex-col justify-start gap-4 items-center"
+      class="relative max-h-screen overflow-y-auto overflow-x-hidden container py-12 max-sm:py-20 p-6 flex flex-col justify-start gap-4 items-center"
     >
       {/* Backdrop */}
       <div
         x-show="isSidePanelOpen"
         x-cloak
-        class="sm:hidden absolute top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/50"
+        x-on:click="isSidePanelOpen ? isSidePanelOpen = false : null"
+        class="sm:hidden z-20 absolute top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/50"
       >
       </div>
 
@@ -95,9 +96,18 @@ Astro.response.headers.set(
         </svg>
       </button>
 
+      <a
+        href="https://async.com/conversations/PlmWz2bH7S9NbU"
+        target="_blank"
+        class="absolute top-4 right-4 btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+        title="Listen to the story, mission, and vision of faith.tools"
+      >
+        Story, Mission, & Vision
+      </a>
+
       <Logo size={128} includeText={false} />
 
-      <h1 class="flex items-center gap-2 text-4xl font-bold max-sm:flex-col">
+      <h1 class="flex items-center gap-2 text-4xl font-bold">
         faith.tools
         <ShareCurrentLinkButton size="sm" />
       </h1>
