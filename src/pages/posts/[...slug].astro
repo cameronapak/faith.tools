@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Logo from "../../components/Logo.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("posts");
@@ -10,35 +11,60 @@ export async function getStaticPaths() {
   }));
 }
 
+const currentUrlWithoutParams = Astro.url.origin + Astro.url.pathname;
+const ogImageUrl =
+  "https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=" +
+  currentUrlWithoutParams;
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 export const prerender = true;
-
-// TODO - add blog later
-return Astro.redirect('/', 301);
 ---
 
-<Layout title={entry.data.title} bodyClasses="prose">
-  <article class="p-6 w-full container">
-    <div class="text-sm breadcrumbs m-0">
-      <ul class="!p-0 !m-0">
-        <li><a href="/">Home</a></li> 
-        <li><a href="/posts">My Blog</a></li> 
-        <li>Post</li>
-      </ul>
-    </div>
+<Layout
+  ogImageUrl={ogImageUrl}
+  title={entry.data.title}
+  description={entry.data.description}
+>
+  <div
+    x-ref="mainContent"
+    id="main"
+    class="relative overflow-x-hidden transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
+  >
+    <header class="!px-0 container mx-auto flex justify-between gap-2">
+      <Logo />
+      <div class="flex justify-center flex-wrap gap-3">
+        <a
+          href="/add/tool"
+          target="_blank"
+          class="max-sm:w-fit btn btn-neutral text-white btn-sm">Add App or Tool</a
+        >
+        <a
+          href="/add/creator"
+          target="_blank"
+          class="max-sm:hidden btn bg-slate-200 hover:bg-slate-300 border-none btn-sm"
+          >Add Creative</a
+        >
+      </div>
+    </header>
 
-    <h1>{entry.data.title}</h1>
+    <article class="w-full prose">
+      <div class="text-sm breadcrumbs m-0">
+        <ul class="!p-0 !m-0">
+          <li><a href="/">Home</a></li>
+          <li><a href="/posts/">Posts</a></li>
+          <li>Post</li>
+        </ul>
+      </div>
 
-    <p>{entry.data.description}</p>
+      <h1>{entry.data.title}</h1>
 
-    <p>Posted on {entry.data.pubDate}</p>
+      <p class="mt-2 text-slate-500">Written by {entry.data.author}</p>
 
-    <p>Written by {entry.data.author}</p>
+      <div class="divider" role="separator"></div>
 
-    <div class="divider" role="separator"></div>
-
-    <Content />
-  </article>
+      <Content />
+    </article>
+  </div>
 </Layout>
