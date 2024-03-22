@@ -4,12 +4,21 @@ import Layout from "../../layouts/Layout.astro";
 import Logo from "../../components/Logo.astro";
 
 const pageTitle = "faith.tools Blog Posts";
-const description = "Writing about the best tools Christians and the faithful people who create them.";
+const description =
+  "Writing about the best tools Christians and the faithful people who create them.";
 const currentUrlWithoutParams = Astro.url.origin + Astro.url.pathname;
 const ogImageUrl =
-  "https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=" + currentUrlWithoutParams;
+  "https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=" +
+  currentUrlWithoutParams;
 
 const allPosts = await getCollection("posts");
+
+// Cache for 1 hour.
+Astro.response.headers.set("Cache-Control", "public, max-age=3600");
+Astro.response.headers.set(
+  "CDN-Cache-Control",
+  "public, max-age=3600, stale-while-revalidate",
+);
 ---
 
 <Layout title={pageTitle} description={description} ogImageUrl={ogImageUrl}>
@@ -18,15 +27,14 @@ const allPosts = await getCollection("posts");
     id="main"
     class="relative overflow-x-hidden transition-[width] max-h-screen overflow-y-auto container pb-12 p-6 flex flex-col justify-start gap-4 items-center"
   >
-    <header
-      class="!px-0 container mx-auto flex justify-between gap-2"
-    >
+    <header class="!px-0 container mx-auto flex justify-between gap-2">
       <Logo />
       <div class="flex justify-center flex-wrap gap-3">
         <a
           href="/add/tool"
           target="_blank"
-          class="max-sm:w-fit btn btn-neutral text-white btn-sm">Add App or Tool</a
+          class="max-sm:w-fit btn btn-neutral text-white btn-sm"
+          >Add App or Tool</a
         >
         <a
           href="/add/creator"

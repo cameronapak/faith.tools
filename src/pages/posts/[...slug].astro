@@ -1,14 +1,14 @@
 ---
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Logo from "../../components/Logo.astro";
 
-export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+const { slug = "" } = Astro.params;
+
+const entry = await getEntry("posts", slug);
+
+if (!slug || !entry) {
+  return Astro.redirect("/posts/", 301);
 }
 
 const currentUrlWithoutParams = Astro.url.origin + Astro.url.pathname;
@@ -16,10 +16,14 @@ const ogImageUrl =
   "https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=" +
   currentUrlWithoutParams;
 
-const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-export const prerender = true;
+// Cache for 1 hour.
+Astro.response.headers.set("Cache-Control", "public, max-age=3600");
+Astro.response.headers.set(
+  "CDN-Cache-Control",
+  "public, max-age=3600, stale-while-revalidate",
+);
 ---
 
 <Layout
@@ -38,7 +42,8 @@ export const prerender = true;
         <a
           href="/add/tool"
           target="_blank"
-          class="max-sm:w-fit btn btn-neutral text-white btn-sm">Add App or Tool</a
+          class="max-sm:w-fit btn btn-neutral text-white btn-sm"
+          >Add App or Tool</a
         >
         <a
           href="/add/creator"
