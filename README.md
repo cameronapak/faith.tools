@@ -1,6 +1,6 @@
 # faith.tools
 
-![faith.tools](public/og-image.png)
+![faith.tools](public/og-image-v1.png)
 
 [Visit Site](https://faith.tools/)
 
