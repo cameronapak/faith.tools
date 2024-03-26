@@ -22,8 +22,11 @@ if (!categoryWithSpaces || !tagsAsStringArray.includes(categoryWithSpaces)) {
 
 const tools = await getListOfTools("", categoryWithSpaces);
 
-const title = `faith.tools - The best ${categoryWithSpaces} digital services and apps for Christians`;
-const description = `A curated list of the best ${categoryWithSpaces} digital services and apps for Christians and the faithful people who create them.`;
+let title = `Best ${categoryWithSpaces} Apps and Tools for Christians`;
+if (categoryWithSpaces.toLowerCase().includes('for')) {
+  title = `Best Christian Apps and Tools for ${categoryWithSpaces.split(/for/i)[1]}`;
+}
+const description = 'Curated by faith.tools';
 
 const ogImageUrl = `https://mugshotbot.com/m?color=teal&hide_watermark=true&mode=light&pattern=none&url=https://faith.tools/${category}`;
 
@@ -167,9 +170,9 @@ Astro.response.headers.set(
         <div class="flex gap-3 items-center mt-2">
           <h1
             class="balanced text-2xl font-bold text-slate-800"
-            x-text={`search ? '"' + search + '" Apps and Tools' : 'Top Christian ${categoryWithSpaces} Apps and Tools'`}
+            x-text={`search ? '"' + search + '" Apps and Tools' : '${title}'`}
           >
-            Top Christian {categoryWithSpaces} Apps and Tools
+            {title}
           </h1>
           <ShareCurrentLinkButton size="sm" />
         </div>
